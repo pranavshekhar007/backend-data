@@ -3,9 +3,9 @@ const timestamps = require("mongoose-timestamp");
 const { type } = require("os");
 
 const itrSchema = mongoose.Schema({
-  userId:{
-    type: String,
-    required: true,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   isSalary: {
     type: Boolean,
