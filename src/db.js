@@ -6,11 +6,10 @@ const connectDB = async () => {
       console.log("Using existing database connection.");
       return;
     }
-    await mongoose.connect(process.env.DB_STRING, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("MongoDB connected.");
+    await mongoose.connect(process.env.DB_STRING
+    ).then(()=>{
+        console.warn("db connection done again")
+    })
   } catch (error) {
     console.error("Database connection error:", error);
     process.exit(1);
