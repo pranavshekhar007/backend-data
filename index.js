@@ -29,8 +29,11 @@ app.use(express.json());
 
 
 // connecting with database
-const connectDB = require("./src/db");
-connectDB();
+const mongoose = require("mongoose");
+mongoose.connect(process.env.DB_STRING
+).then(()=>{
+    console.warn("db connection done again")
+})
 
 // Pass the `io` instance to routes
 app.use((req, res, next) => {
