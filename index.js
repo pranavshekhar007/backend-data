@@ -41,7 +41,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => res.send(`Server listing on PORT ${PORT}`));
+app.get("/", (req, res) => res.send(`Server listing on port ${PORT}`));
 app.use("/api", routes);
 app.all("*", (req, res) => res.status(404).json({ error: "404 Not Found " })); 
 
