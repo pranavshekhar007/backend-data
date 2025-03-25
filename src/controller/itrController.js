@@ -22,20 +22,17 @@ itrController.post("/create", async (req, res) => {
   }
 });
 
-// update itr
-itrController.put("/update", async (req, res) => {
+itrController.put("/update/:id", async (req, res) => {
   try {
-    const id = req.body._id; 
-    const itr = await Itr.findById(id);
+    const { id } = req.params;
+    const updatedItr = await Itr.findByIdAndUpdate(id, req.body, { new: true });
 
-    if (!itr) {
+    if (!updatedItr) {
       return sendResponse(res, 404, "Failed", {
-        message: "ITR not found",
+        message: "ITR not found!",
         statusCode: 404,
       });
     }
-
-    const updatedItr = await Itr.findByIdAndUpdate(id, req.body, { new: true });
 
     sendResponse(res, 200, "Success", {
       message: "ITR updated successfully!",
