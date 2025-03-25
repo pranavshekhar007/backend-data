@@ -9,27 +9,31 @@ const itrSchema = mongoose.Schema({
   },
   isSalary: {
     type: Boolean,
-    required: true,
   },
   isHouseProperty: {
     type: Boolean,
-    required: true,
   },
   isProfession: {
     type: Boolean,
-    required: true,
   },
   isCapitalGain: {
     type: Boolean,
-    required: true,
   },
   isOtherSource: {
     type: Boolean,
-    required: true,
   },
   isForeignSource: {
     type: Boolean,
-    required: true,
+  },
+  financialYear: {
+    type: String,
+  },
+  panNumber: {
+    type: String,
+    unique: true,
+  },
+  dateOfBirth: {
+    type: Date,
   },
 });
 
