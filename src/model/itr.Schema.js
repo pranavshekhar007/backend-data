@@ -35,6 +35,36 @@ const itrSchema = mongoose.Schema({
   dateOfBirth: {
     type: Date,
   },
+  firstName: {
+    type: String,
+    trim: true,
+  },
+  middleName: {
+    type: String,
+    trim: true,
+  },
+  lastName: {
+    type: String,
+    trim: true,
+  },
+  fatherName: {
+    type: String,
+    trim: true,
+  },
+  phoneNumber: {
+    type: String,
+    unique: true,
+  },
+  email: {
+    type: String,
+    unique: true,
+    lowercase: true,
+  },
+  gender: {
+    type: String,
+    enum: ["male", "female", "other"],
+    default: "male",
+  },
 });
 
 itrSchema.plugin(timestamps);
