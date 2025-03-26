@@ -65,6 +65,16 @@ const itrSchema = mongoose.Schema({
     enum: ["male", "female", "other"],
     default: "male",
   },
+  pincode: {
+    type: String,
+  },
+  address1:{
+    type: String
+  },
+  address2:{
+    type: String
+  },
+
 });
 
 itrSchema.plugin(timestamps);

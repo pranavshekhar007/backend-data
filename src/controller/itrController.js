@@ -22,6 +22,7 @@ itrController.post("/create", async (req, res) => {
   }
 });
 
+// update itr
 itrController.put("/update/:id", async (req, res) => {
   try {
     const { id } = req.params;
