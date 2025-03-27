@@ -120,7 +120,7 @@ const itrSchema = mongoose.Schema({
       type: String,
     },
   },
-  
+
   // Deductions
   deductions: {
     lic: { type: String },
@@ -133,6 +133,29 @@ const itrSchema = mongoose.Schema({
     annuityPremium: { type: String },
     otherDeductions: { type: String },
   },
+  
+  // Medical Insurance
+  medicalInsurance: [
+    {
+      isPolicyHolderSenior: {
+        type: String,
+        enum: ["yes", "no"],
+        default: "no",
+      },
+      insuranceType: {
+        type: String,
+      },
+      preventiveHealthCheckUp: {
+        type: String,
+      },
+      medicalExpenditure: {
+        type: String,
+      },
+      medicalInsurancePremium: {
+        type: String,
+      },
+    },
+  ],
 });
 
 itrSchema.plugin(timestamps);
