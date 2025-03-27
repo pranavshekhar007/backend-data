@@ -26,7 +26,8 @@ itrController.post("/create", async (req, res) => {
 itrController.put("/update/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedItr = await Itr.findByIdAndUpdate(id, req.body, { new: true });
+    const updateData = req.body;
+    const updatedItr = await Itr.findByIdAndUpdate(id, {$set: updateData}, { new: true });
 
     if (!updatedItr) {
       return sendResponse(res, 404, "Failed", {
