@@ -75,6 +75,51 @@ const itrSchema = mongoose.Schema({
     type: String
   },
 
+  //House Property Details
+  houseProperty: {
+    housePropertyType:{
+      type: String,
+      enum: ["self", "rented"],
+    },
+    pincode: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    estimatedRent: {
+      type: String,
+    },
+    tenants: [
+      {
+        name: {type: String},
+        pan: {type: String},
+        rent: {type: String},
+      },
+    ],
+    loanToken: {
+      type:String,
+      enum: ["yes", "no"],
+      default: "no",
+    },
+    interestOnLoan: {
+      type:String,
+    },
+    repairLoan: {
+      type: String,
+    },
+    preConstructionInterest: {
+      type: String,
+    },
+    propertyTaxPaid: {
+      type: String,
+      enum: ["yes", "no"],
+      default: "no",
+    },
+    propertyTaxAmount: {
+      type: String,
+    },
+  },
 });
 
 itrSchema.plugin(timestamps);
