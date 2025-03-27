@@ -120,6 +120,19 @@ const itrSchema = mongoose.Schema({
       type: String,
     },
   },
+  
+  // Deductions
+  deductions: {
+    lic: { type: String },
+    pf: { type: String },
+    ppf: { type: String },
+    housingLoan: { type: String },
+    fdr: { type: String },
+    nsc: { type: String },
+    tuitionFees: { type: String },
+    annuityPremium: { type: String },
+    otherDeductions: { type: String },
+  },
 });
 
 itrSchema.plugin(timestamps);
