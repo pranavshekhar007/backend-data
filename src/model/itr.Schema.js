@@ -156,6 +156,21 @@ const itrSchema = mongoose.Schema({
       },
     },
   ],
+  donations: 
+    {
+      sectionType: { type: String, default: "80GGC" },
+      donationDate: { type: Date },
+      donationCash: { type: String },
+      donationOtherMode: { type: String },
+      totalDonationAmount: { type: String },
+      eligibleDonationAmount: { type: String },
+      nameOfDonee: { type: String },
+      panOfDonee: { type: String },
+      limitOfDeductions: { type: String },
+      percentageOfAmount: { type: String },
+      pincode: { type: String },
+      address: { type: String },
+    },
 });
 
 itrSchema.plugin(timestamps);
