@@ -156,6 +156,8 @@ const itrSchema = mongoose.Schema({
       },
     },
   ],
+
+  // Donation
   donations: 
     {
       sectionType: { type: String, default: "80GGC" },
