@@ -270,6 +270,28 @@ const itrSchema = mongoose.Schema({
       tcsAmount: { type: Number },
     },
   ],
+
+  // Extra Details Section
+  extraDetails: {
+    returnFilingType: { type: String },
+    returnFiledStatus: { type: String },
+    itrFiledForm: { type: String },
+    filingDate: { type: Date },
+    acknowledgmentNo: { type: String },
+    totalIncome: { type: Number },
+    totalTaxPayable: { type: Number },
+    refundClaimed: { type: Number },
+    refundIssued: { type: Number },
+    regularAssessmentTax: { type: Number },
+    reasonToFileUpdatedITR: { type: String },
+    additionalIncome: {
+      salary: { type: Number },
+      houseProperty: { type: Number },
+      businessOrProfession: { type: Number },
+      capitalGains: { type: Number },
+      otherSources: { type: Number },
+    },
+  },
 });
 
 itrSchema.plugin(timestamps);
