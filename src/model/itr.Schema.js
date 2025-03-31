@@ -68,16 +68,16 @@ const itrSchema = mongoose.Schema({
   pincode: {
     type: String,
   },
-  address1:{
-    type: String
+  address1: {
+    type: String,
   },
-  address2:{
-    type: String
+  address2: {
+    type: String,
   },
 
   //House Property Details
   houseProperty: {
-    housePropertyType:{
+    housePropertyType: {
       type: String,
       enum: ["self", "rented"],
     },
@@ -92,18 +92,18 @@ const itrSchema = mongoose.Schema({
     },
     tenants: [
       {
-        name: {type: String},
-        pan: {type: String},
-        rent: {type: String},
+        name: { type: String },
+        pan: { type: String },
+        rent: { type: String },
       },
     ],
     loanToken: {
-      type:String,
+      type: String,
       enum: ["yes", "no"],
       default: "no",
     },
     interestOnLoan: {
-      type:String,
+      type: String,
     },
     repairLoan: {
       type: String,
@@ -133,7 +133,7 @@ const itrSchema = mongoose.Schema({
     annuityPremium: { type: String },
     otherDeductions: { type: String },
   },
-  
+
   // Medical Insurance
   medicalInsurance: [
     {
@@ -158,21 +158,65 @@ const itrSchema = mongoose.Schema({
   ],
 
   // Donation
-  donations: 
+  donations: {
+    sectionType: { type: String, default: "80GGC" },
+    donationDate: { type: Date },
+    donationCash: { type: String },
+    donationOtherMode: { type: String },
+    totalDonationAmount: { type: String },
+    eligibleDonationAmount: { type: String },
+    nameOfDonee: { type: String },
+    panOfDonee: { type: String },
+    limitOfDeductions: { type: String },
+    percentageOfAmount: { type: String },
+    pincode: { type: String },
+    address: { type: String },
+  },
+
+
+  // Other Inputs (Dynamic)
+  otherInputs: [
     {
-      sectionType: { type: String, default: "80GGC" },
-      donationDate: { type: Date },
-      donationCash: { type: String },
-      donationOtherMode: { type: String },
-      totalDonationAmount: { type: String },
-      eligibleDonationAmount: { type: String },
-      nameOfDonee: { type: String },
-      panOfDonee: { type: String },
-      limitOfDeductions: { type: String },
-      percentageOfAmount: { type: String },
-      pincode: { type: String },
-      address: { type: String },
+      type: { type: String },
+      amount: { type: String },
     },
+  ],
+
+  // Section 80DD (Disability Deduction)
+  section80DD_U: {
+    selectedMember: { type: String },
+    self: {
+      expenditure: { type: String },
+      severity: { type: String, enum: ["40", "80"] },
+      filingDate: { type: String },
+      ackNumber: { type: String },
+      udID: { type: String },
+    },
+    family: {
+      expenditure: { type: String },
+      severity: { type: String, enum: ["40", "80"] },
+      relation: { type: String },
+      dependentPAN: { type: String },
+      dependentAadhaar: { type: String },
+    },
+  },
+
+  // Section 80DDB (Medical Treatment for Specified Diseases)
+  section80DDB: {
+    diseasedCitizen: { type: String },
+    totalExpenditure: { type: String },
+  },
+
+  // Section 80E (Education Loan Interest)
+  section80E: {
+    loanInterest: { type: String },
+  },
+
+  // Section 80GG (Rent Paid Deduction)
+  section80GG: {
+    rentPaid: { type: String },
+    monthsPaid: { type: String },
+  },
 });
 
 itrSchema.plugin(timestamps);
