@@ -173,7 +173,6 @@ const itrSchema = mongoose.Schema({
     address: { type: String },
   },
 
-
   // Other Inputs (Dynamic)
   otherInputs: [
     {
@@ -218,22 +217,59 @@ const itrSchema = mongoose.Schema({
     monthsPaid: { type: String },
   },
 
-   // Bank Details
-   bankForms: [
+  // Bank Details
+  bankForms: [
     {
-      ifsc: { type: String, required: true },
-      bankName: { type: String, required: true },
-      accountNumber: { type: String, required: true, unique: true },
-      accountType: { type: String, enum: ["savings", "current"], required: true },
+      ifsc: { type: String },
+      bankName: { type: String },
+      accountNumber: { type: String, unique: true },
+      accountType: { type: String, enum: ["savings", "current"] },
     },
   ],
 
   // Aadhaar Number
   aadhaarNumber: {
     type: String,
-    required: true,
     unique: true,
   },
+
+  // New Tax Sections
+  advanceTax: [
+    {
+      date: { type: Date },
+      amount: { type: Number },
+      paymentMode: { type: String },
+    },
+  ],
+  updatedReturnTax: [
+    {
+      date: { type: Date },
+      amount: { type: Number },
+      reason: { type: String },
+    },
+  ],
+  tdsOtherThanSalary: [
+    {
+      deductorName: { type: String },
+      panOfDeductor: { type: String },
+      tdsAmount: { type: Number },
+    },
+  ],
+  tdsRentalIncome: [
+    {
+      landlordName: { type: String },
+      panOfLandlord: { type: String },
+      rentalAmount: { type: Number },
+      tdsAmount: { type: Number },
+    },
+  ],
+  taxCollectedAtSource: [
+    {
+      collectorName: { type: String },
+      panOfCollector: { type: String },
+      tcsAmount: { type: Number },
+    },
+  ],
 });
 
 itrSchema.plugin(timestamps);
