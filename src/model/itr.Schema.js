@@ -217,6 +217,23 @@ const itrSchema = mongoose.Schema({
     rentPaid: { type: String },
     monthsPaid: { type: String },
   },
+
+   // Bank Details
+   bankForms: [
+    {
+      ifsc: { type: String, required: true },
+      bankName: { type: String, required: true },
+      accountNumber: { type: String, required: true, unique: true },
+      accountType: { type: String, enum: ["savings", "current"], required: true },
+    },
+  ],
+
+  // Aadhaar Number
+  aadhaarNumber: {
+    type: String,
+    required: true,
+    unique: true,
+  },
 });
 
 itrSchema.plugin(timestamps);
