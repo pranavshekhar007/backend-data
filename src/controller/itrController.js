@@ -5,6 +5,7 @@ const Itr = require("../model/itr.Schema");
 const itrController = express.Router();
 require("dotenv").config();
 
+// Create Itr
 itrController.post("/create", async (req, res) => {
   try {
     const itrCreated = await Itr.create(req.body);
@@ -60,6 +61,79 @@ itrController.put("/update/:id", async (req, res) => {
     });
   }
 });
+
+
+// Get all ITRs
+itrController.get("/all", async (req, res) => {
+  try {
+    const itrs = await Itr.find();
+    sendResponse(res, 200, "Success", {
+      message: "ITRs fetched successfully!",
+      data: itrs,
+      statusCode: 200,
+    });
+  } catch (error) {
+    console.error(error);
+    sendResponse(res, 500, "Failed", {
+      message: error.message || "Internal server error",
+      statusCode: 500,
+    });
+  }
+});
+
+// Get ITR by ID
+itrController.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const itr = await Itr.findById(id);
+
+    if (!itr) {
+      return sendResponse(res, 404, "Failed", {
+        message: "ITR not found!",
+        statusCode: 404,
+      });
+    }
+
+    sendResponse(res, 200, "Success", {
+      message: "ITR fetched successfully!",
+      data: itr,
+      statusCode: 200,
+    });
+  } catch (error) {
+    console.error(error);
+    sendResponse(res, 500, "Failed", {
+      message: error.message || "Internal server error",
+      statusCode: 500,
+    });
+  }
+});
+
+// Delete ITR
+itrController.delete("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedItr = await Itr.findByIdAndDelete(id);
+
+    if (!deletedItr) {
+      return sendResponse(res, 404, "Failed", {
+        message: "ITR not found!",
+        statusCode: 404,
+      });
+    }
+
+    sendResponse(res, 200, "Success", {
+      message: "ITR deleted successfully!",
+      statusCode: 200,
+    });
+  } catch (error) {
+    console.error(error);
+    sendResponse(res, 500, "Failed", {
+      message: error.message || "Internal server error",
+      statusCode: 500,
+    });
+  }
+});
+
 
 
 
