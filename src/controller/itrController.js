@@ -32,13 +32,10 @@ itrController.put("/update/:id", async (req, res) => {
     const updateQuery = { $set: {} };
 
     Object.keys(updateData).forEach((key) => {
-      if (Array.isArray(updateData[key])) {
-        updateQuery[key] = updateData[key]; // Replace entire array
-      } else {
-        updateQuery.$set[key] = updateData[key]; // Update single field
-      }
-    });
+      if (key === 'createdAt') return;
 
+      updateQuery.$set[key] = updateData[key];
+    });
     const updatedItr = await Itr.findByIdAndUpdate(id, updateQuery, { new: true });
 
     if (!updatedItr) {
