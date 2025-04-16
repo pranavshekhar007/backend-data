@@ -63,7 +63,26 @@ itrController.put("/update/:id", async (req, res) => {
 // Get all ITRs
 itrController.get("/all", async (req, res) => {
   try {
-    const itrs = await Itr.find();
+    const { searchKey = "", sortByField = "createdAt", sortOrder = "-1" } = req.query;
+
+    // Construct search query
+    const query = {};
+    if (searchKey) {
+      query.$or = [
+        { firstName: { $regex: searchKey, $options: "i" } },
+        { middleName: { $regex: searchKey, $options: "i" } },
+        { lastName: { $regex: searchKey, $options: "i" } },
+      ];
+    }
+
+    // Construct sort object
+    const sort = {};
+    if (sortByField) {
+      sort[sortByField] = parseInt(sortOrder); // 1 for ASC, -1 for DESC
+    }
+
+    const itrs = await Itr.find(query).sort(sort);
+
     sendResponse(res, 200, "Success", {
       message: "ITRs fetched successfully!",
       data: itrs,
@@ -77,6 +96,7 @@ itrController.get("/all", async (req, res) => {
     });
   }
 });
+
 
 // Get ITR by ID
 itrController.get("/:id", async (req, res) => {

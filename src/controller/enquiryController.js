@@ -24,7 +24,26 @@ enquiryController.post("/create", async (req, res) => {
 // Get All Enquiries
 enquiryController.get("/all", async (req, res) => {
   try {
-    const enquiries = await Enquiry.find();
+
+    const {searchKey = "", sortByField = "createdAt", sortOrder = "-1" } = req.query;
+
+    // construct search query
+    const query = {};
+    if(searchKey){
+      query.$or = [
+        { name: { $regex: searchKey, $options: "i" } },
+        { email: { $regex: searchKey, $options: "i" } },
+        { phone: { $regex: searchKey, $options: "i" } },
+      ];
+    }
+
+    // construct sort object
+    const sort = {};
+    if (sortByField) {
+      sort[sortByField] = parseInt(sortOrder);
+    }
+
+    const enquiries = await Enquiry.find(query).sort(sort);
     sendResponse(res, 200, "Success", {
       message: "All enquiries fetched successfully!",
       data: enquiries,
