@@ -30,8 +30,6 @@ scheduleController.post("/create", async (req, res) => {
     }
   });
   
-
-// Get All Schedules
 // Get All Schedules
 scheduleController.get("/all", async (req, res) => {
   try {
@@ -39,7 +37,7 @@ scheduleController.get("/all", async (req, res) => {
       searchKey = "",
       sortByField = "createdAt",
       sortOrder = "-1",
-      status = "", // Add status filter
+      status = "",
     } = req.query;
 
     const sort = {};
