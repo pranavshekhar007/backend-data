@@ -7,6 +7,7 @@ const priceSchema = new mongoose.Schema(
     pricing: { type: Number, required: true },
     image: { type: String },
     service: { type: String, required: true },
+    suitedFor: [{ type: String }],
   },
   { timestamps: true }
 );
